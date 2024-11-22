@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "ReutilizaPlus",
-    "slug": "ReutilizaPlus",
-    "version": "1.0.0"
+    "slug": "reutilizaplus",
+    "platforms": ["ios", "android"],
+    "newArchEnabled": true
   }
 }

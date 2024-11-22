@@ -1,18 +1,91 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 export default function CadastroNovoUser() {
+  const [username, setUsername] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+
+  const handleCadastro = async () => {
+    if (senha !== confirmarSenha) {
+      Alert.alert(
+        'Erro',
+        'As senhas não coincidem!',
+        [{ text: 'OK', onPress: () => console.log('Alerta fechado') }]
+      );
+      return;
+    }
+  
+    const novoUsuario = {
+      username,
+      senha,
+    };
+  
+    try {
+      const response = await fetch('http://192.168.15.13:5000/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(novoUsuario),
+      });
+  
+      if (response.ok) {
+        Alert.alert(
+          'Sucesso',
+          'Usuário cadastrado com sucesso!',
+          [{ text: 'OK', onPress: () => console.log('Usuário cadastrado') }]
+        );
+        setUsername('');
+        setSenha('');
+        setConfirmarSenha('');
+      } else {
+        const erro = await response.json();
+        Alert.alert(
+          'Erro',
+          erro.mensagem || 'Falha ao cadastrar o usuário.',
+          [{ text: 'OK', onPress: () => console.log('Erro ao cadastrar') }]
+        );
+      }
+    } catch (error) {
+      Alert.alert(
+        'Erro',
+        'Não foi possível conectar ao servidor.',
+        [{ text: 'OK', onPress: () => console.log('Erro de conexão:', error, JSON.stringify(novoUsuario)) }]
+      );
+    }
+  };
+  
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Reutiliza +</Text>
       
       <Text style={styles.label}>Primeiro acesso?</Text>
       
-      <TextInput style={styles.input} placeholder="E-mail" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Senha" secureTextEntry={true} />
-      <TextInput style={styles.input} placeholder="Confirme a senha" secureTextEntry={true} />
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        keyboardType="username-address"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        secureTextEntry={true}
+        value={senha}
+        onChangeText={setSenha}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirme a senha"
+        secureTextEntry={true}
+        value={confirmarSenha}
+        onChangeText={setConfirmarSenha}
+      />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleCadastro}>
         <Text style={styles.buttonText}>Continuar</Text>
       </TouchableOpacity>
 
