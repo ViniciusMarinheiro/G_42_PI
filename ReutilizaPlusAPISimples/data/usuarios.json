@@ -1,6 +1,7 @@
 [
     {
         "username": "teste",
+<<<<<<< HEAD
         "senha": "123",
         "nome": "Teste",
         "data_nascimento": "",
@@ -25,5 +26,8 @@
             "senha_atual": "",
             "nova_senha": ""
         }
+=======
+        "senha": 123
+>>>>>>> c98e57ad3e727b1ba855dc6c6e390d159dc27d96
     }
 ]
