@@ -40,7 +40,7 @@ export default function Login() {
 
       if (response.status === 200) {
         Alert.alert('Sucesso', 'Login bem-sucedido!');
-        navigation.navigate('MeuPerfil');
+        navigation.navigate('MeuPerfil', {username});
       } else {
         Alert.alert('Erro', data.erro || 'Erro ao tentar fazer login.');
       }
@@ -67,6 +67,7 @@ export default function Login() {
         placeholder="Senha"
         value={senha}
         onChangeText={setSenha}
+        type="password"
       />
 
       <TouchableOpacity style={styles.forgotPasswordButton}>

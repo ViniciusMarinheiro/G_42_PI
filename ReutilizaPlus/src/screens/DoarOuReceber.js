@@ -16,6 +16,7 @@ const DoarOuReceber = ({ navigation }) => {
         />
       </View>
     </View>
+
   );
 };
 

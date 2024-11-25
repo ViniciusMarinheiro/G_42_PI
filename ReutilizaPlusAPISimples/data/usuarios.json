@@ -1,14 +1,29 @@
 [
     {
         "username": "teste",
-        "senha": 123
-    },
-    {
-        "username": "testwwwwe",
-        "senha": 123
-    },
-    {
-        "username": "macacoprego",
-        "senha": "zoo"
+        "senha": "123",
+        "nome": "Teste",
+        "data_nascimento": "",
+        "email": "",
+        "cpf": "",
+        "telefone": "",
+        "telefone2": "",
+        "rg": "",
+        "endereco": {
+            "cep": "",
+            "rua": "",
+            "numero": "",
+            "cidade": "",
+            "bairro": "",
+            "complemento": ""
+        },
+        "preferencias": {
+            "notificacoes": false,
+            "limites": false
+        },
+        "alteracao_senha": {
+            "senha_atual": "",
+            "nova_senha": ""
+        }
     }
 ]
